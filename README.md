@@ -5,7 +5,7 @@
 本系統旨在協助企業分析員工滿意度，預測流失風險，並提供改善建議。
 
 <details>
-  <summary>📌 **系統流程說明**（點擊展開/收起）</summary>
+  <summary><strong>📌 系統流程說明</strong></summary>
 
 ## 1. HR 上傳數據（CSV 或 Google 表單）
 **目標：** 讓 HR 能夠提交員工數據作為分析基礎。
