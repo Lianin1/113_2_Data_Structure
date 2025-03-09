@@ -6,6 +6,7 @@
 
 <details>
   <summary>📌 **系統流程說明**（點擊展開/收起）</summary>
+
 ## 1. HR 上傳數據（CSV 或 Google 表單）
 **目標：** 讓 HR 能夠提交員工數據作為分析基礎。
 
@@ -64,4 +65,13 @@
 
 此系統將協助企業更有效率地管理員工滿意度，降低流失率，並提升整體工作環境。🚀
 
+</details>
+
+<details>
+  <summary><strong>HW1</strong></summary>
+
+  針對本周的作業，系統流程圖可以參考 **"專案計畫_0311"** 資料夾內的檔案，  
+  詳細系統架構可展開上方 **"系統流程說明"**，  
+  另程式碼替換作業請參考 **"test"** 資料夾內的 **"employee_satisfaction_test.py"**。
+  
 </details>
