@@ -7,6 +7,8 @@
 <details>
   <summary><strong>📌 系統流程說明</strong></summary>
 
+![員工滿意度系統概覽圖](專案計畫_0311/0316_update.drawio.html)
+
 ## 1. HR 上傳數據（CSV 或 Google 表單）
 **目標：** 讓 HR 能夠提交員工數據作為分析基礎。
 

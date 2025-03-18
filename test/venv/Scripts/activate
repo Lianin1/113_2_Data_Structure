@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Lian\NTNU\Data_Sructure_test\test\venv"
+VIRTUAL_ENV="C:\Lian\NTNU\113_2_Data_Structure\test\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
