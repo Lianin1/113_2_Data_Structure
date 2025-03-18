@@ -73,7 +73,7 @@
   <summary><strong>HW1</strong></summary>
 
   針對本周的作業，詳細系統架構可展開上方 **"系統流程說明"**，  
-  程式碼替換作業請參考 [employee_satisfaction_test.py](test/employee_satisfaction_test.py)， 
+  程式碼替換作業請參考 [employee_satisfaction_test.py](test/employee_satisfaction_test.py)，  
   本次作業先嘗試以少量量化數據進行測試，確認 ai agent 能順利透過量化數據提供分析結果以及建議。
   
 </details>
