@@ -14,6 +14,7 @@ from autogen_ext.agents.web_surfer import MultimodalWebSurfer
 
 load_dotenv()
 
+# HW1 修改 promt
 async def process_chunk(chunk, start_idx, total_records, model_client, termination_condition):
     """
     處理單一批次資料：
@@ -73,6 +74,7 @@ async def main():
     
     termination_condition = TextMentionTermination("exit")
     
+    # HW1 製作資料表並修改資料表路徑
     # 使用 pandas 以 chunksize 方式讀取員工滿意度資料 CSV 檔案
     csv_file_path = "employee_satisfaction_test.csv"  # 假設是這份 CSV 檔案
     chunk_size = 1000
