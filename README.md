@@ -7,7 +7,7 @@
 <details>
   <summary><strong>📌 系統流程說明</strong></summary>
 
-![員工滿意度系統概覽圖](專案計畫_0311/0316_update.drawio.html)
+![員工滿意度系統概覽圖](專案計畫_0311/Diagram.jpg)
 
 ## 1. HR 上傳數據（CSV 或 Google 表單）
 **目標：** 讓 HR 能夠提交員工數據作為分析基礎。
@@ -74,7 +74,7 @@
 
   針對本周的作業，系統流程圖可以參考 **"專案計畫_0311"** 資料夾內的檔案，  
   詳細系統架構可展開上方 **"系統流程說明"**，  
-  另程式碼替換作業請參考 **"test"** 資料夾內的 **"employee_satisfaction_test.py"**，  
+  另程式碼替換作業請參考 **"test"** 資料夾內的 **(test/employee_satisfaction_test.py)**，  
   本次作業先嘗試以少量量化數據進行測試，確認 ai agent 能順利透過量化數據提供分析結果以及建議。
   
 </details>
