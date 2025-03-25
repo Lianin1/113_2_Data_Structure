@@ -77,3 +77,11 @@
   本次作業先嘗試以少量量化數據進行測試，確認 ai agent 能順利透過量化數據提供分析結果以及建議。
   
 </details>
+
+<details>
+  <summary><strong>HW2</strong></summary>
+
+  針對本周的作業，請參考 [t318.py](test/DRai/t318.py)，  
+  本次作業以員工主管 1:1 對話內容替代原先資料，利用 ai agent 對內容語調進行評分。
+  
+</details>
