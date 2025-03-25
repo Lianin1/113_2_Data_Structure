@@ -10,6 +10,7 @@ from google.api_core import exceptions
 # 載入 .env 中的 GEMINI_API_KEY
 load_dotenv()
 
+# HW2 更改評分項目
 # 定義評分項目（針對主管與員工 1:1 對話）
 ITEMS = [
     "明確目標設定",
@@ -69,6 +70,7 @@ def process_batch_dialogue(dialogues: list, model, delimiter="-----"):
     提示中要求模型對每筆逐字稿產生 JSON 格式回覆，
     並以指定的 delimiter 分隔各筆結果。
     """
+    # HW2 更改 Prompt
     prompt = (
         "你是一位管理與溝通分析專家，請根據以下評分項目評估主管與員工 1:1 對話中的每一句話，\n"
         + "\n".join(ITEMS) +
