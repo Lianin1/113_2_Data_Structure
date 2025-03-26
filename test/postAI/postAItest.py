@@ -2,10 +2,12 @@ from playwright.sync_api import sync_playwright
 import os
 from dotenv import load_dotenv
 
+# HW3 依需求更改讀取之 env 檔
 # 讀取 .env 檔案
 load_dotenv()
 SLACK_EMAIL = os.getenv("SLACK_EMAIL")
 
+# HW3 依自身需求撰寫 laywright code
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False)  # 顯示瀏覽器
     page = browser.new_page()

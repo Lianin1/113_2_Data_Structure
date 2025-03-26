@@ -74,14 +74,24 @@
 
   針對本周的作業，詳細系統架構可展開上方 **"系統流程說明"**，  
   程式碼替換作業請參考 [employee_satisfaction_test.py](test/employee_satisfaction_test.py)，  
-  本次作業先嘗試以少量量化數據進行測試，確認 ai agent 能順利透過量化數據提供分析結果以及建議。
+  本次作業先嘗試以少量量化數據 [employee_satisfaction_test.csv](test/employee_satisfaction_test.csv)，  進行測試，確認 ai agent 能順利透過量化數據提供分析結果以及建議 [employee_satisfaction_report.csv](test/employee_satisfaction_report.csv)。
   
 </details>
 
 <details>
   <summary><strong>HW2</strong></summary>
 
-  針對本周的作業，請參考 [t318.py](test/DRai/t318.py)，  
-  本次作業以員工主管 1:1 對話內容替代原先資料，利用 ai agent 對內容語調進行評分。
+  針對本周的作業，程式碼請參考 [t318.py](test/DRai/t318.py)，  
+  本次作業以員工主管 1:1 對話內容 [t318.csv](test/DRai/t318.csv) 替代原先資料，利用 ai agent 對內容語調進行評分，產出分析報告 [1on1_analysis.csv](test/DRai/1on1_analysis.csv)。  
+  執行結果請參考 [HW2.png](HWSS/HW2.png)
+  
+</details>
+
+<details>
+  <summary><strong>HW3</strong></summary>
+
+  針對本周的作業，程式碼請參考 [postAItest.py](test/postAI/postAItest.py)，  
+  本次作業以團隊溝通軟體 - Slack 為例，透過 Playwright 控制瀏覽器登入 Slack 並於指定的頻道發送訊息  
+  執行結果請參考 [HW3.png](HWSS/HW3.png)
   
 </details>
