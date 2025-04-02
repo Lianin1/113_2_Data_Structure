@@ -1,0 +1,9 @@
+﻿Employee_ID,Satisfaction,Sentiment_Score,Years_at_Company,Attrition_Risk,Recommendation_Score
+1,4,0.6,3,Low,8
+2,2,-0.3,5,High,3
+3,5,0.9,1,Low,9
+4,3,0.1,2,Medium,6
+5,1,-0.8,7,High,2
+6,4,0.5,4,Medium,7
+7,3,0.0,10,Low,5
+8,2,-0.4,6,High,4
