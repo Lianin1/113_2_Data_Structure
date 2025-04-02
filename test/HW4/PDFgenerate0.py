@@ -7,7 +7,7 @@ import time
 # 导入需要执行的模块
 import employee_satisfaction_test
 import t318
-import postAItest
+import test.HW4.slack as slack
 
 # 载入环境变量
 load_dotenv()
@@ -84,7 +84,7 @@ def main():
     modules = [
         employee_satisfaction_test,
         t318,
-        postAItest
+        slack
     ]
 
     outputs = []

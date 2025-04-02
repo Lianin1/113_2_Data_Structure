@@ -17,12 +17,9 @@ genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-2.5-pro-exp-03-25')  # 初始化模型
 
 def get_chinese_font_file() -> str:
-    """
-    只檢查 Windows 系統字型資料夾中是否存在候選中文字型（TTF 格式）。
-    若找到則回傳完整路徑；否則回傳 None。
-    """
+    # HW4 設定自訂義字體
     fonts_path = r"C:\USERS\A0934\APPDATA\LOCAL\MICROSOFT\WINDOWS\FONTS"
-    candidates = ["NotoSansTC-VariableFont_wght_1.ttf"]  # 這裡以楷體為例，可依需要修改
+    candidates = ["NotoSansTC-VariableFont_wght_1.ttf"] 
     for font in candidates:
         font_path = os.path.join(fonts_path, font)
         if os.path.exists(font_path):
@@ -31,116 +28,38 @@ def get_chinese_font_file() -> str:
     print("未在系統中找到候選中文字型檔案。")
     return None
 
-def create_table(pdf: FPDF, df: pd.DataFrame):
-    """
-    使用 FPDF 將 DataFrame 以表格形式繪製至 PDF。
-    - 'start' 和 'end' 欄位寬度根據內容自適應。
-    - 其餘欄位平均分配剩餘寬度。
-    - 內容超出欄位寬度時自動換行。
-    - 每一列的高度統一為該列中最高的格子高度。
-    - 邊框與背景色對齊。
-    """
+
+# HW4 依需求改為分段純文字 pdf 內容
+def create_text_content(pdf: FPDF, df: pd.DataFrame):
     available_width = pdf.w - 2 * pdf.l_margin
-    base_cell_height = 10  # 基礎單元格高度（每行的基準高度）
+    base_cell_height = 10  # 基礎行高
 
-    # 計算各欄寬度
-    col_widths = {}
-    pdf.set_font("ChineseFont", "", 10)  # 用於測量文字寬度
-
-    # 計算 'start' 和 'end' 欄的最小寬度
-    for col in ['start', 'end']:
-        if col in df.columns:
-            max_width = max(
-                pdf.get_string_width(str(col)),  # 表頭寬度
-                max(pdf.get_string_width(str(x)) for x in df[col].fillna(''))  # 內容最大寬度
-            ) + 4  # 增加一點內邊距
-            col_widths[col] = min(max_width, 30)  # 限制最大寬度為 30，避免過寬
-
-    # 剩餘寬度平均分配給其他欄位
-    remaining_cols = [col for col in df.columns if col not in ['start', 'end']]
-    remaining_width = available_width - sum(col_widths.values())
-    other_col_width = remaining_width / len(remaining_cols) if remaining_cols else 0
-    for col in remaining_cols:
-        col_widths[col] = other_col_width
-
-    # 表頭
-    pdf.set_fill_color(200, 200, 200)
-    pdf.set_font("ChineseFont", "", 12)
-    x_start = pdf.get_x()
-    y_start = pdf.get_y()
-    for col in df.columns:
-        pdf.rect(x_start, y_start, col_widths[col], base_cell_height, style="DF")  # 繪製表頭邊框和背景
-        pdf.set_xy(x_start, y_start)
-        pdf.cell(col_widths[col], base_cell_height, str(col), border=0, align="C")
-        x_start += col_widths[col]
-    pdf.ln(base_cell_height)
-
-    # 資料行：交替背景色並支援自動換行
+    # 設置字體
     pdf.set_font("ChineseFont", "", 10)
-    fill = False
-    for index, row in df.iterrows():
-        # 計算該列的最大高度
-        max_lines = 1  # 至少一行
-        for col, item in zip(df.columns, row):
-            text = str(item)
-            # 計算需要的行數（考慮換行）
-            num_lines = max(1, (pdf.get_string_width(text) / col_widths[col]) + 1)
-            max_lines = max(max_lines, int(num_lines))
 
-        # 根據行數計算該列的總高度
-        row_height = base_cell_height * max_lines
+    # 逐行處理 DataFrame
+    for index, row in df.iterrows():
+        # 構建該行的文字內容
+        row_text = " | ".join(f"{col}: {str(item)}" for col, item in zip(df.columns, row))
+        
+        # 計算該段文字需要的行數
+        text_width = pdf.get_string_width(row_text)
+        num_lines = max(1, int((text_width / available_width) + 1))  # 計算需要的行數
+        row_height = base_cell_height * num_lines
 
         # 檢查是否需要換頁
-        if pdf.get_y() + row_height > pdf.h - pdf.b_margin:
+        if pdf.get_y() + row_height + base_cell_height > pdf.h - pdf.b_margin:
             pdf.add_page()
-            pdf.set_fill_color(200, 200, 200)
-            pdf.set_font("ChineseFont", "", 12)
-            x_start = pdf.get_x()
-            y_start = pdf.get_y()
-            for col in df.columns:
-                pdf.rect(x_start, y_start, col_widths[col], base_cell_height, style="DF")
-                pdf.set_xy(x_start, y_start)
-                pdf.cell(col_widths[col], base_cell_height, str(col), border=0, align="C")
-                x_start += col_widths[col]
-            pdf.ln(base_cell_height)
-            pdf.set_font("ChineseFont", "", 10)
 
-        # 設定背景色
-        if fill:
-            pdf.set_fill_color(230, 240, 255)
-        else:
-            pdf.set_fill_color(255, 255, 255)
+        # 繪製文字內容
+        pdf.multi_cell(available_width, base_cell_height, row_text, border=0, align="L")
+        
+        # 增加空行分隔
+        pdf.ln(base_cell_height)
 
-        # 記錄當前 x, y 位置
-        x_start = pdf.get_x()
-        y_start = pdf.get_y()
-
-        # 繪製背景矩形和邊框（確保邊框與背景色對齊）
-        for col in df.columns:
-            pdf.rect(x_start, y_start, col_widths[col], row_height, style="DF")  # 繪製邊框和背景
-            x_start += col_widths[col]
-
-        # 繪製每一列的內容
-        x_start = pdf.get_x()  # 重置 x 位置
-        for col, item in zip(df.columns, row):
-            pdf.set_xy(x_start, y_start)
-            # 使用 multi_cell 繪製內容，但不繪製邊框（border=0）
-            pdf.multi_cell(col_widths[col], base_cell_height, str(item), border=0, align="L")
-            x_start += col_widths[col]  # 移動到下一欄
-
-        # 移動到下一行
-        pdf.set_xy(pdf.l_margin, y_start + row_height)
-        fill = not fill
 
 def parse_markdown_table(markdown_text: str) -> pd.DataFrame:
-    """
-    從 Markdown 格式的表格文字提取資料，返回一個 pandas DataFrame。
-    例如，輸入：
-      | start | end | text | 分類 | 註解 |
-      |-------|-----|------|------|------|
-      | 00:00 | 00:01 | 開始拍攝喔 | 準備開始拍攝行為 |
-    會返回包含該資料的 DataFrame。
-    """
+
     lines = markdown_text.strip().splitlines()
     # 過濾掉空行
     lines = [line.strip() for line in lines if line.strip()]
@@ -218,7 +137,7 @@ def gradio_handler(csv_file, user_prompt):
             block_response = response.text.strip()
             cumulative_response += f"區塊 {i//block_size+1}:\n{block_response}\n\n"
             block_responses.append(cumulative_response)
-        # 將所有區塊回應合併，並生成漂亮表格 PDF
+
         pdf_path = generate_pdf(text=cumulative_response)
         return cumulative_response, pdf_path
     else:
@@ -235,19 +154,8 @@ def gradio_handler(csv_file, user_prompt):
         pdf_path = generate_pdf(text=response_text)
         return response_text, pdf_path
 
-default_prompt = """請根據以下的規則將每句對話進行分類，並為每個分類提供註解，說明分類的理由：
-
-"明確目標設定",
-"提供具體反饋",
-"積極傾聽"
-"鼓勵參與",
-"解決問題",
-"情感支持",
-"確認理解",
-"連結工作意義",
-"開放式提問",
-
-並將所有類別進行統計後產出報表。"""
+# HW4 更改 prompt 為自己所需之功能
+default_prompt = """將整個檔案進行分析，發表你的看法"""
 
 with gr.Blocks() as demo:
     gr.Markdown("# CSV 報表生成器")
