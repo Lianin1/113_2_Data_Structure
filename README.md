@@ -95,3 +95,12 @@
   執行結果請參考 [HW3.png](HWSS/HW3.png)
   
 </details>
+
+<details>
+  <summary><strong>HW4</strong></summary>
+
+  針對本周的作業，程式碼請參考 [PDFconclu.py](test/HW4/PDFconclu.py) & [slack.py](test/HW4/slack.py)  
+  本次作業以課程程式碼作為基礎，將 HW1 & HW2 作業中所產出的 csv 檔案重新交由 Gradio 介面下指令，並將回應內容製成 PDF - [report_1.pdf](test/HW4/report_1.pdf) & [report_2.pdf](test/HW4/report_2.pdf)，介面操作可參考 [satisfaction_ana.png](test/HW4/SS/satisfaction_ana.png) & [1on1_ana.png](test/HW4/SS/1on1_ana.png)  
+  再透過 HW3 的方式，將兩份 PDF 檔案上傳至指定的 Slack 頻道，程式碼執行終端機及上傳截圖請參考 [slackterminal.png](test/HW4/SS/slackterminal.png) & [slack_post_result.png](test/HW4/slack_post_result.png)  
+  
+</details>

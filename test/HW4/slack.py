@@ -9,8 +9,8 @@ SLACK_EMAIL = os.getenv("SLACK_EMAIL")
 # HW4 設定檔案路徑與檔名，讓機器人自動傳送兩筆檔案
 # 動態獲取當前腳本所在目錄，並指定多個檔案名稱
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-FILE_NAME_1 = "report_20250402_232621.pdf"  # 第一個檔案名稱
-FILE_NAME_2 = "report_20250402_235230.pdf"  # 第二個檔案名稱（請替換為實際名稱）
+FILE_NAME_1 = "report_1.pdf"  # 第一個檔案名稱（請替換為實際名稱）
+FILE_NAME_2 = "report_2.pdf"  # 第二個檔案名稱（請替換為實際名稱）
 FILE_PATHS = [
     os.path.join(SCRIPT_DIR, FILE_NAME_1),
     os.path.join(SCRIPT_DIR, FILE_NAME_2)
