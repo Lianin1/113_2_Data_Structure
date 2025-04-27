@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <title>主管與員工 1:1 對話分析系統</title>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        #upload-form { margin-bottom: 20px; }
+        #progress, #suggestions { margin-top: 10px; padding: 10px; border: 1px solid #ddd; }
+        #plot img { max-width: 100%; }
+        #download { margin-top: 20px; }
+        button, input[type="submit"] { padding: 8px 16px; cursor: pointer; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>📂 上傳對話逐字稿</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required />
+        <input type="submit" value="上傳並分析" />
+    </form>
+
+    <h2>📊 評分結果</h2>
+    <div id="plot">
+        <img id="rating-trend" src="" alt="評分結果圖將顯示於此" style="display: none;" />
+    </div>
+
+    <h2>🧩 即時分析進度</h2>
+    <div id="progress"></div>
+
+    <h2>💡 建議</h2>
+    <div id="suggestions"></div>
+
+    <h2>📥 下載結果</h2>
+    <div id="download">
+        <a id="download-link" href="" download style="display: none;">下載分析結果 (CSV)</a>
+    </div>
+
+    <script>
+        const socket = io();
+        const form = document.getElementById('upload-form');
+        const progress = document.getElementById('progress');
+        const suggestions = document.getElementById('suggestions');
+        const ratingTrend = document.getElementById('rating-trend');
+        const downloadLink = document.getElementById('download-link');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            progress.innerHTML = '⏳ 正在上傳檔案...';
+            const formData = new FormData(form);
+            try {
+                const response = await fetch('/upload', { method: 'POST', body: formData });
+                if (!response.ok) throw new Error('上傳失敗');
+                progress.innerHTML = '🟢 檔案上傳成功，開始分析中...';
+                suggestions.innerHTML = '';
+                ratingTrend.style.display = 'none';
+                downloadLink.style.display = 'none';
+            } catch (error) {
+                progress.innerHTML = `<p class="error">❌ 上傳失敗：${error.message}</p>`;
+            }
+        });
+
+        socket.on('update', function (data) {
+            progress.innerHTML += `<p>${data.message}</p>`;
+        });
+
+        socket.on('plot_generated', function (data) {
+            ratingTrend.src = data.plot_url + '?t=' + new Date().getTime();
+            ratingTrend.style.display = 'block';
+        });
+
+        socket.on('suggestions', function (data) {
+            suggestions.innerHTML = `<pre>${data.suggestions}</pre>`;
+        });
+
+        socket.on('result_ready', function (data) {
+            downloadLink.href = data.result_url;
+            downloadLink.style.display = 'block';
+        });
+
+        socket.on('error', function (data) {
+            progress.innerHTML += `<p class="error">❌ ${data.message}</p>`;
+        });
+    </script>
+</body>
+</html>

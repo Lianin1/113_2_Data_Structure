@@ -104,3 +104,14 @@
   再透過 HW3 的方式，將兩份 PDF 檔案上傳至指定的 Slack 頻道，程式碼執行終端機及上傳截圖請參考 [slackterminal.png](test/HW4/SS/slackterminal.png) & [slack_post_result.png](test/HW4/slack_post_result.png)  
   
 </details>
+
+<details>
+  <summary><strong>HW5</strong></summary>
+
+  針對本周的作業，程式碼請參考 [HW5](test/HW5)  
+  本次作業利用課程所介紹之 Flask 後端搭配 Socket.IO 通訊，將 HW2 作業內容進行優化，為其設計前端功能  
+  產出[評分圖表](test/HW5/static/rating_plot.png)的同時，提供整體對話數據的建議  
+  本次測試中分別使用 [simu_dia_hig](test/HW5/data/simu_dia_hig.csv) 以及 [simu_dia_low](test/HW5/data/simu_dia_low.csv) 分別模擬高效溝通與低效溝通  
+  執行結果可參考 [good](test/HW5/pic/good.png) & [bad](test/HW5/pic/bad.png)。  
+
+</details>
