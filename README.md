@@ -110,6 +110,7 @@
 
   針對本周的作業，程式碼請參考 [HW5](test/HW5)  
   本次作業利用課程所介紹之 Flask 後端搭配 Socket.IO 通訊，將 HW2 作業內容進行優化，為其設計前端功能  
+  主程式為 [app.py](test/HW5/app.py)，搭配 [index.html](test/HW5/templates/index.html) 前端介面，分別調用 [dialog_processor.py](test/HW5/dialog_processor.py)、[analysis.py](test/HW5/analysis.py)、[utils.py](test/HW5/utils.py) 來實現功能  
   產出[評分圖表](test/HW5/static/rating_plot.png)的同時，提供整體對話數據的建議  
   本次測試中分別使用 [simu_dia_hig](test/HW5/data/simu_dia_hig.csv) 以及 [simu_dia_low](test/HW5/data/simu_dia_low.csv) 分別模擬高效溝通與低效溝通  
   執行結果可參考 [good](test/HW5/pic/good.png) & [bad](test/HW5/pic/bad.png)。  
